@@ -11,6 +11,7 @@ $gump->validation_rules(array(
 	'lastname'    => 'required|alpha|max_len,30|min_len,1',
 	'email'       => 'required|valid_email',
 	'password'    => 'required|max_len,50|min_len,6',
+	'selectDepartment'  => 'required',
 ));
 $gump->filter_rules(array(
 	'username' => 'trim|sanitize_string',
@@ -18,6 +19,7 @@ $gump->filter_rules(array(
 	'lastname' => 'trim|sanitize_string',
 	'password' => 'trim',
 	'email'    => 'trim|sanitize_email',
+	'selectDepartment'=>'trim|sanitize_string',
 	));
 $validated_data = $gump->run($_POST);
 
@@ -30,6 +32,9 @@ if($validated_data === false) {
 else if ($_POST['password'] !== $_POST['cpassword']) 
 {
 	echo  "<center><font color='red'>Passwords do not match </font></center>";
+	include ('register.php');
+}else if($_POST['selectDepartment']=="0"){
+	echo  "<center><font color='red'>Please select Division </font></center>";
 	include ('register.php');
 }
 else {
@@ -47,7 +52,8 @@ else {
       $email = $validated_data['email'];
       $pass = $validated_data['password'];
       $password = password_hash("$pass" , PASSWORD_DEFAULT);
-      $query = "INSERT INTO users(username,firstname,lastname,email,password) VALUES ('$username' , '$firstname' , '$lastname' , '$email', '$password')";
+      $department = $validated_data['selectDepartment'];
+      $query = "INSERT INTO users(username,firstname,lastname,email,password,department) VALUES ('$username' , '$firstname' , '$lastname' , '$email', '$password','$department')";
       $result = mysqli_query($conn , $query) or die(mysqli_error($conn));
       if (mysqli_affected_rows($conn) > 0) {
       	echo "<script>alert('SUCCESSFULLY REGISTERED');

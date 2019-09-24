@@ -27,14 +27,24 @@
 
 
 				<div class="input-group">
-		<label for="department">Department</label>
-			<select name="status" class="form-control">
- echo "<option value='Administration'>Administration</option>";
- echo "<option value='IT'>IT</option>";
-</select>
-</div>
-
-
+					<label for="department">Department</label>
+						<select name="selectDepartment" class="form-control">
+							<option value="0">---Select Division--</option>
+						  <option value="admin">प्रशासन महाशाखा</option>
+						  <option value="law">कानून तथा फैसला कार्यानवयन महाशाखा</option>
+						  <option value="revenue">राजस्व व्यवस्थापन महाशाखा</option>
+						  <option value="financial">वित्तिय क्षेत्र व्यवस्थापन तथा संस्थान समन्वय महाशाखा</option>
+						  <option value="planning">योजना, अनुगमन तथा मूल्याङ्न महाशाखा</option>
+						  <option value="economics">आर्थिक नीति विश्ल़ेषण महाशाखा</option>
+						  <option value="budget">बजेट तथा कार्यक्रम महाशाखा</option>
+						  <option value="international"> अन्तराष्ट्रिय आर्थिक सहायता समन्वयन महाशाखा</option>	
+					 	</select>
+					 	<?php
+					 	if(isset($_POST["register"]))
+					 		$selectDepartment=$_POST["selectDepartment"];
+					 	?>
+		           	</div>
+			
 
 				<div class="form-group">
 					<label for="email">Email</label>
@@ -51,7 +61,6 @@
 				</div>
 <button type="submit" class="btn btn-primary" name="register">Register</button>
  			</form>
-
  		</div>
  		<div class="col-xs-4"></div>
  	</div>
